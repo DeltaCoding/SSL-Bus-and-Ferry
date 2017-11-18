@@ -1,0 +1,93 @@
+<?xml version="1.0" encoding="utf-8"?>
+<RelativeLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    xmlns:tools="http://schemas.android.com/tools"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    android:paddingLeft="16dp"
+    android:paddingRight="16dp"
+    tools:context="io.github.deltacoding.sslbusandferry.MainActivity">
+
+    <TextView
+        android:id="@+id/textViewTime"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_alignParentTop="true"
+        android:layout_marginEnd="16dp"
+        android:layout_marginTop="30dp"
+        android:layout_toStartOf="@+id/editTextTime"
+        android:text="Time" />
+
+    <EditText
+        android:id="@+id/editTextTime"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_alignBaseline="@+id/textViewTime"
+        android:layout_alignBottom="@+id/textViewTime"
+        android:layout_centerHorizontal="true"
+        android:cursorVisible="false"
+        android:ems="10"
+        android:focusable="false"
+        android:inputType="none"
+        android:onClick="showTimePickerDialog" />
+
+    <TextView
+        android:id="@+id/textViewDate"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_alignBaseline="@+id/editTextDate"
+        android:layout_alignBottom="@+id/editTextDate"
+        android:layout_alignEnd="@+id/textViewTime"
+        android:text="Date" />
+
+    <EditText
+        android:id="@+id/editTextDate"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_alignStart="@+id/editTextTime"
+        android:layout_below="@+id/editTextTime"
+        android:layout_marginTop="14dp"
+        android:ems="10"
+        android:focusable="false"
+        android:inputType="none"
+        android:cursorVisible="false"
+        android:onClick="showDatePickerDialog" />
+
+    <TextView
+        android:id="@+id/textViewFrom"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_alignBottom="@+id/spinnerFrom"
+        android:layout_alignStart="@+id/textViewDate"
+        android:text="From" />
+
+    <Spinner
+        android:id="@+id/spinnerFrom"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:layout_alignEnd="@+id/editTextDate"
+        android:layout_alignStart="@+id/editTextDate"
+        android:layout_below="@+id/editTextDate"
+        android:layout_marginTop="19dp"
+        android:entries="@array/stops" />
+
+
+
+    <TextView
+        android:id="@+id/textViewTo"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_alignBottom="@+id/spinnerTo"
+        android:layout_alignStart="@+id/textViewFrom"
+        android:text="To" />
+
+    <Spinner
+        android:id="@+id/spinnerTo"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:layout_alignEnd="@+id/spinnerFrom"
+        android:layout_alignStart="@+id/spinnerFrom"
+        android:layout_below="@+id/spinnerFrom"
+        android:layout_marginTop="19dp"
+        android:entries="@array/stops" />
+</RelativeLayout>

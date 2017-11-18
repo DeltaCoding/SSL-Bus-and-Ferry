@@ -1,0 +1,8 @@
+<resources>
+    <string name="app_name">SSL Bus and Ferry</string>
+
+    <string-array name="stops">
+        <item>Tórshavn</item>
+        <item>Klaksvík</item>
+    </string-array>
+</resources>
