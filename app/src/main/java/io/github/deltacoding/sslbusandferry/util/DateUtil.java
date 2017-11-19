@@ -29,6 +29,25 @@ public class DateUtil {
         return text;
     }
 
+    public static String convertToString(int hour, int minute) {
+        String text = "";
+
+        if(hour < 10) {
+            text += "0" + hour;
+        } else {
+            text += hour;
+        }
+        text += ":";
+
+        if(minute < 10) {
+            text += "0" + minute;
+        } else {
+            text += minute;
+        }
+
+        return text;
+    }
+
     public static boolean isDateToday(int year, int month, int day) {
         Calendar c = Calendar.getInstance();
         int currentYear = c.get(Calendar.YEAR);
@@ -51,6 +70,7 @@ public class DateUtil {
             int year = Integer.parseInt(values[2]);
             int month = Integer.parseInt(values[1]) - 1;
             int day = Integer.parseInt(values[0]);
+
             if(year > 0) {
                 if(month >= 0 && month <= 11) {
                     if(month == 0 || month == 2 || month == 4 || month == 6
@@ -90,6 +110,30 @@ public class DateUtil {
         } else {
             return false;
         }
+    }
+
+    public static boolean isValidTime(String time) {
+        String[] values = time.split("\\:");
+        if(values.length == 2) {
+            int hour = Integer.parseInt(values[0]);
+            int minute = Integer.parseInt(values[1]);
+
+            if(hour >= 0 && hour <= 23 && minute >= 0 && minute <= 59) {
+                return true;
+            } else {
+                return false;
+            }
+        } else {
+            return false;
+        }
+    }
+
+    public static String getCurrentTime() {
+        final Calendar c = Calendar.getInstance();
+        int hour = c.get(Calendar.HOUR_OF_DAY);
+        int minute = c.get(Calendar.MINUTE);
+
+        return convertToString(hour, minute);
     }
 
 }
