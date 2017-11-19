@@ -6,6 +6,7 @@
     android:layout_height="match_parent"
     android:paddingLeft="16dp"
     android:paddingRight="16dp"
+    android:layout_marginTop="100dp"
     tools:context="io.github.deltacoding.sslbusandferry.MainActivity">
 
     <TextView
@@ -16,7 +17,7 @@
         android:layout_marginEnd="16dp"
         android:layout_marginTop="30dp"
         android:layout_toStartOf="@+id/editTextTime"
-        android:text="Time" />
+        android:text="@string/timeLabel" />
 
     <EditText
         android:id="@+id/editTextTime"
@@ -38,7 +39,7 @@
         android:layout_alignBaseline="@+id/editTextDate"
         android:layout_alignBottom="@+id/editTextDate"
         android:layout_alignEnd="@+id/textViewTime"
-        android:text="Date" />
+        android:text="@string/dateLabel" />
 
     <EditText
         android:id="@+id/editTextDate"
@@ -59,7 +60,7 @@
         android:layout_height="wrap_content"
         android:layout_alignBottom="@+id/spinnerFrom"
         android:layout_alignStart="@+id/textViewDate"
-        android:text="From" />
+        android:text="@string/fromLabel" />
 
     <Spinner
         android:id="@+id/spinnerFrom"
@@ -79,7 +80,7 @@
         android:layout_height="wrap_content"
         android:layout_alignBottom="@+id/spinnerTo"
         android:layout_alignStart="@+id/textViewFrom"
-        android:text="To" />
+        android:text="@string/toLabel" />
 
     <Spinner
         android:id="@+id/spinnerTo"
@@ -90,4 +91,13 @@
         android:layout_below="@+id/spinnerFrom"
         android:layout_marginTop="19dp"
         android:entries="@array/stops" />
+
+    <Button
+        android:id="@+id/button"
+        android:layout_width="match_parent"
+        android:layout_height="65dp"
+        android:layout_alignParentStart="true"
+        android:layout_below="@+id/textViewTo"
+        android:layout_marginTop="11dp"
+        android:text="@string/searchButtonText" />
 </RelativeLayout>

@@ -1,5 +1,10 @@
 <resources>
     <string name="app_name">SSL Bus and Ferry</string>
+    <string name="timeLabel">Time</string>
+    <string name="dateLabel">Date</string>
+    <string name="fromLabel">From</string>
+    <string name="toLabel">To</string>
+    <string name="searchButtonText">Search</string>
 
     <string-array name="stops">
         <item>Tórshavn</item>
