@@ -1,19 +1,48 @@
 package io.github.deltacoding.sslbusandferry;
 
 import android.app.DialogFragment;
+import android.content.Intent;
+import android.content.SharedPreferences;
 import android.support.v7.app.AppCompatActivity;
 import android.os.Bundle;
 import android.view.View;
+import android.widget.EditText;
+import android.widget.Spinner;
 
 import io.github.deltacoding.sslbusandferry.fragments.DatePickerFragment;
 import io.github.deltacoding.sslbusandferry.fragments.TimePickerFragment;
 
 public class MainActivity extends AppCompatActivity {
 
+    private EditText time;
+    private EditText date;
+    private Spinner from;
+    private Spinner to;
+
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_main);
+
+        time = (EditText) findViewById(R.id.editTextTime);
+        date = (EditText) findViewById(R.id.editTextDate);
+        from = (Spinner) findViewById(R.id.spinnerFrom);
+        to = (Spinner) findViewById(R.id.spinnerTo);
+    }
+
+    @Override
+    protected void onActivityResult(int requestCode, int resultCode, Intent data) {
+        super.onActivityResult(requestCode, resultCode, data);
+
+        String timeData = loadString("time");
+        String dateData = loadString("date");
+        int fromData = loadInt("from");
+        int toData = loadInt("to");
+
+        time.setText(timeData);
+        date.setText(dateData);
+        from.setSelection(fromData);
+        to.setSelection(toData);
     }
 
     public void showTimePickerDialog(View v) {
@@ -24,5 +53,38 @@ public class MainActivity extends AppCompatActivity {
     public void showDatePickerDialog(View v) {
         DialogFragment newFrag = new DatePickerFragment();
         newFrag.show(getFragmentManager(), "datePicker");
+    }
+
+    public void onSearchButtonClicked(View v) {
+        save();
+        Intent intent = new Intent(this, RequestedRouteActivity.class);
+        startActivityForResult(intent, 1);
+    }
+
+    public void onSwapButtonClicked(View v) {
+        int fromPos = from.getSelectedItemPosition();
+        int toPos = to.getSelectedItemPosition();
+        from.setSelection(toPos);
+        to.setSelection(fromPos);
+    }
+
+    private void save() {
+        SharedPreferences settings = getPreferences(0);
+        SharedPreferences.Editor editor = settings.edit();
+
+        editor.putString("time", time.getText().toString());
+        editor.putString("date", date.getText().toString());
+        editor.putInt("from", from.getSelectedItemPosition());
+        editor.putInt("to", to.getSelectedItemPosition());
+
+        editor.commit();
+    }
+
+    private String loadString(String dataName) {
+        return getPreferences(0).getString(dataName, "");
+    }
+
+    private int loadInt(String dataName) {
+        return getPreferences(0).getInt(dataName, 0);
     }
 }

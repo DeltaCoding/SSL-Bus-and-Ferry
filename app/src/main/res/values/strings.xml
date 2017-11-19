@@ -5,6 +5,7 @@
     <string name="fromLabel">From</string>
     <string name="toLabel">To</string>
     <string name="searchButtonText">Search</string>
+    <string name="swapButtonText">⇅</string>
 
     <string-array name="stops">
         <item>Tórshavn</item>
