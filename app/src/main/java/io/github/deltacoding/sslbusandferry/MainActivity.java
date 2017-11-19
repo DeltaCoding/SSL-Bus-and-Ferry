@@ -5,12 +5,14 @@ import android.content.Intent;
 import android.content.SharedPreferences;
 import android.support.v7.app.AppCompatActivity;
 import android.os.Bundle;
+import android.util.Log;
 import android.view.View;
 import android.widget.EditText;
 import android.widget.Spinner;
 
 import io.github.deltacoding.sslbusandferry.fragments.DatePickerFragment;
 import io.github.deltacoding.sslbusandferry.fragments.TimePickerFragment;
+import io.github.deltacoding.sslbusandferry.util.DateUtil;
 
 public class MainActivity extends AppCompatActivity {
 
@@ -28,21 +30,8 @@ public class MainActivity extends AppCompatActivity {
         date = (EditText) findViewById(R.id.editTextDate);
         from = (Spinner) findViewById(R.id.spinnerFrom);
         to = (Spinner) findViewById(R.id.spinnerTo);
-    }
 
-    @Override
-    protected void onActivityResult(int requestCode, int resultCode, Intent data) {
-        super.onActivityResult(requestCode, resultCode, data);
-
-        String timeData = loadString("time");
-        String dateData = loadString("date");
-        int fromData = loadInt("from");
-        int toData = loadInt("to");
-
-        time.setText(timeData);
-        date.setText(dateData);
-        from.setSelection(fromData);
-        to.setSelection(toData);
+        loadData();
     }
 
     public void showTimePickerDialog(View v) {
@@ -58,7 +47,7 @@ public class MainActivity extends AppCompatActivity {
     public void onSearchButtonClicked(View v) {
         save();
         Intent intent = new Intent(this, RequestedRouteActivity.class);
-        startActivityForResult(intent, 1);
+        startActivity(intent);
     }
 
     public void onSwapButtonClicked(View v) {
@@ -66,6 +55,7 @@ public class MainActivity extends AppCompatActivity {
         int toPos = to.getSelectedItemPosition();
         from.setSelection(toPos);
         to.setSelection(fromPos);
+        save();
     }
 
     private void save() {
@@ -81,10 +71,32 @@ public class MainActivity extends AppCompatActivity {
     }
 
     private String loadString(String dataName) {
-        return getPreferences(0).getString(dataName, "");
+        SharedPreferences settings = getPreferences(0);
+        return settings.getString(dataName, "");
     }
 
     private int loadInt(String dataName) {
-        return getPreferences(0).getInt(dataName, 0);
+        SharedPreferences settings = getPreferences(0);
+        return settings.getInt(dataName, 0);
+    }
+
+    private void loadData() {
+        String timeData = loadString("time");
+        String dateData = loadString("date");
+        int fromData = loadInt("from");
+        int toData = loadInt("to");
+
+        if(!(timeData == "") && DateUtil.isValidTime(timeData)) {
+            time.setText(timeData);
+        } else {
+            time.setText(DateUtil.getCurrentTime());
+        }
+        if(!(dateData == "") && DateUtil.isValidDate(dateData)) {
+            date.setText(dateData);
+        } else {
+            date.setText("Today");
+        }
+        from.setSelection(fromData);
+        to.setSelection(toData);
     }
 }
