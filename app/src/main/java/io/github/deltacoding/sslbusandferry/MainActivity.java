@@ -31,6 +31,24 @@ public class MainActivity extends AppCompatActivity {
         from = (Spinner) findViewById(R.id.spinnerFrom);
         to = (Spinner) findViewById(R.id.spinnerTo);
 
+        time.setOnLongClickListener(new View.OnLongClickListener() {
+            @Override
+            public boolean onLongClick(View view) {
+                time.setText(DateUtil.getCurrentTime());
+
+                return true;
+            }
+        });
+
+        date.setOnLongClickListener(new View.OnLongClickListener() {
+            @Override
+            public boolean onLongClick(View view) {
+                date.setText("Today");
+
+                return true;
+            }
+        });
+
         loadData();
     }
 
